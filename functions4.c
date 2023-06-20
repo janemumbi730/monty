@@ -29,7 +29,7 @@ void op_divide(stack_t **stack, unsigned int line_number)
 	int w = 0;
 	stack_t *q = NULL;
 
-	aux = *stack;
+	q = *stack;
 
 	for (; q != NULL; q = q->next, w++)
 		;
