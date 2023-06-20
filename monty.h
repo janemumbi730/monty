@@ -1,12 +1,13 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
-#include <stddef.h>
+#include <fcntl.h>
 #include <sys/types.h>
-#include <string.h>
+#include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -38,28 +39,25 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct globals - global structure to use in the functions
- * @lifo: is stack or queue
- * @cont: current line
- * @arg: second parameter inside the current line
- * @head: doubly linked list
- * @fd: file descriptor
- * @buffer: input text
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO Holberton project
+ * struct overrall - the global structure
+ * @h: linked list
+ * @lifo: stack or queue
+ * @fd: descriptor
+ * @buf: input text
+ * @cline: current line
+ * @args: parameter
  */
 typedef struct overrall
 {
+	stack_t *h;
 	int lifo;
-	unsigned int cont;
-	char  *arg;
-	stack_t *head;
 	FILE *fd;
-	char *buffer;
+	char *buf;
+	unsigned int cline;
+	char  *args;
 } overrall_t;
 
-extern overrall_t vglo;
+extern overrall_t vrall;
 
 /* functions.c */
 void op_pop(stack_t **stack, unsigned int line_number);
