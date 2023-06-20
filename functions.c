@@ -7,21 +7,17 @@
  */
 void op_pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *t;
+	stack_t *x;
 
-	if (*stack == NULL)
+	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		dprintf(2, "L%u: can't pop an empty stack\n", line_number);
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
-
-	t = *stack;
+	x = *stack;
 	*stack = (*stack)->next;
-
-	if (*stack != NULL)
-		(*stack)->prev = NULL;
-
-	free(t);
+	free(x);
 }
 
 /**
@@ -44,17 +40,24 @@ void op_nop(stack_t **stack, unsigned int line_number)
  */
 void op_sub(stack_t **stack, unsigned int line_number)
 {
-	int x;
+	int i = 0;
+	stack_t *q = NULL;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	q = *stack;
+
+	for (; q != NULL; q = q->next, i++)
+		;
+
+	if (i < 2)
 	{
-		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		dprintf(2, "L%u: can't sub, stack too short\n", line_number);
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
 
-	x = (*stack)->next->n - (*stack)->n;
+	q = (*stack)->next;
+	q->n -= (*stack)->n;
 	op_pop(stack, line_number);
-	(*stack)->n = x;
 }
 
 /**
@@ -65,36 +68,41 @@ void op_sub(stack_t **stack, unsigned int line_number)
  */
 void op_add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *up;
-	stack_t *next;
+	int u = 0;
+	stack_t *q = NULL;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	q = *stack;
+
+	for (; q != NULL; q = q->next, u++)
+		;
+
+	if (u < 2)
 	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		dprintf(2, "L%u: can't add, stack too short\n", line_number);
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
 
-	up = *stack;
-	next = (*stack)->next;
-
-	next->n += up->n;
-
-	*stack = next;
-	(*stack)->prev = NULL;
-	free(up);
+	q = (*stack)->next;
+	q->n += (*stack)->n;
+	op_pop(stack, line_number);
 }
 
 /**
- * handle_pint - Prints the value at the top of the stack.
+ * op_pint - prints value of stack
  * @stack: double pointer
  * @line_number: line number
  * Return: void
  */
 void op_pint(stack_t **stack, unsigned int line_number)
 {
+	(void)line_number;
+
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		dprintf(2, "L%u: ", line_number);
+		dprintf(2, "can't pint, stack empty\n");
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
 
