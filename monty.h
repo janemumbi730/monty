@@ -1,8 +1,6 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
-#define  _GNU_SOURCE
-
 #include <stddef.h>
 #include <sys/types.h>
 #include <string.h>
@@ -39,7 +37,31 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* fumctions.c */
+/**
+ * struct globals - global structure to use in the functions
+ * @lifo: is stack or queue
+ * @cont: current line
+ * @arg: second parameter inside the current line
+ * @head: doubly linked list
+ * @fd: file descriptor
+ * @buffer: input text
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct overrall
+{
+	int lifo;
+	unsigned int cont;
+	char  *arg;
+	stack_t *head;
+	FILE *fd;
+	char *buffer;
+} overrall_t;
+
+extern overrall_t vglo;
+
+/* functions.c */
 void op_pop(stack_t **stack, unsigned int line_number);
 void op_nop(stack_t **stack, unsigned int line_number);
 void op_sub(stack_t **stack, unsigned int line_number);
