@@ -53,7 +53,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	if (vrall.lifo == 1)
 		plus_nodeint(stack, n);
 	else
-		plust_nodeintend(stack, n);
+		plus_nodeintend(stack, n);
 }
 /**
  * op_swap - swaps two elements of stack
@@ -111,5 +111,5 @@ void op_stack(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	(void)line_number;
 
-	vglo.lifo = 1;
+	vrall.lifo = 1;
 }
