@@ -87,4 +87,14 @@ void op_multiply(stack_t **stack, unsigned int line_number);
 int my_search(char *str, char c);
 char *my_strtok(char *str, char *dell);
 
+/* retriver.c */
+void (*retrive_ops(char *ops))(stack_t **stack, unsigned int line_number);
+
+/* opcode_instrction.c */
+stack_t *plus_nodeintend(stack_t **h, const int n);
+void *op_concat(unsigned int x, unsigned int y);
+void *op_changer(void *pointer, unsigned int past, unsigned int present);
+stack_t *plus_nodeint(stack_t **h, const int n);
+void op_freelist(stack_t *h);
+
 #endif
