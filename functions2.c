@@ -8,17 +8,17 @@
  */
 void op_pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *x = *stack;
-
+	stack_t *q;
 	(void)line_number;
 
-	while (x != NULL)
+	q = *stack;
+
+	while (q)
 	{
-		printf("%d\n", x->n);
-		x = x->next;
+		printf("%d\n", q->n);
+		q = q->next;
 	}
 }
-
 /**
  * op_push - pushes stack
  * @stack: double pointer
@@ -27,25 +27,34 @@ void op_pall(stack_t **stack, unsigned int line_number)
  */
 void op_push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *x;
-  
-	x = malloc(sizeof(stack_t));
-	if (x == NULL)
+	int a, n;
+
+	if (!vrall.args)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		dprintf(2, "L%u: ", line_number);
+		dprintf(2, "usage: push integer\n");
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
 
-	x->n = line_number;
-	x->prev = NULL;
-	x->next = NULL;
+	for (a = 0; vrall.args[a] != '\0'; a++)
+	{
+		if (!isdigit(vrall.args[a]) && vrall.args[a] != '-')
+		{
+			dprintf(2, "L%u: ", line_number);
+			dprintf(2, "usage: push integer\n");
+			free_vrall();
+			exit(EXIT_FAILURE);
+		}
+	}
 
-	if (*stack != NULL)
-		(*stack)->prev = x;
-	x->next = *stack;
-	*stack = x;
+	n = atoi(vrall.args);
+
+	if (vrall.lifo == 1)
+		plus_nodeint(stack, n);
+	else
+		plust_nodeintend(stack, n);
 }
-
 /**
  * op_swap - swaps two elements of stack
  * @stack: double pointer
@@ -54,26 +63,53 @@ void op_push(stack_t **stack, unsigned int line_number)
  */
 void op_swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *up;
-	stack_t *next;
+	int w = 0;
+	stack_t *q = NULL;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	q = *stack;
+
+	for (; q != NULL; q = q->next, w++)
+		;
+
+	if (w < 2)
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		dprintf(2, "L%u: can't swap, stack too short\n", line_number);
+		free_vrall();
 		exit(EXIT_FAILURE);
 	}
 
-	up = *stack;
-	next = (*stack)->next;
+	q = *stack;
+	*stack = (*stack)->next;
+	q->next = (*stack)->next;
+	q->prev = *stack;
+	(*stack)->next = q;
+	(*stack)->prev = NULL;
+}
 
-	up->prev = next;
-	up->next = next->next;
+/**
+ * op_queue - format of data to a queue
+ * @stack: double pointer
+ * @line_number: line number
+ * Return: void
+ */
+void op_queue(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
 
-	up->prev = NULL;
-	up->next = up;
+	vrall.lifo = 0;
+}
 
-	if (up->next != NULL)
-		up->next->prev = up;
+/**
+ * op_stack - format of data to a stack
+ * @stack: double pointer
+ * @line_number: line number
+ * Return: void
+ */
+void op_stack(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
 
-	*stack = next;
+	vglo.lifo = 1;
 }
