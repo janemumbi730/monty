@@ -1,5 +1,5 @@
-#ifndef _MONTY_H_
-#define _MONTY_H_
+#ifndef MONTY_H
+#define MONTY_H
 
 #include <fcntl.h>
 #include <sys/types.h>
@@ -96,5 +96,8 @@ void *op_concat(unsigned int x, unsigned int y);
 void *op_changer(void *pointer, unsigned int past, unsigned int present);
 stack_t *plus_nodeint(stack_t **h, const int n);
 void op_freelist(stack_t *h);
+
+/*main.c*/
+void free_vrall(void);
 
 #endif
