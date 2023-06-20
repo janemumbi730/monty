@@ -95,15 +95,15 @@ void op_add(stack_t **stack, unsigned int line_number)
  */
 void op_pint(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
+    (void)line_number;
 
-	if (*stack == NULL)
-	{
-		dprintf(2, "L%u: ", line_number);
-		dprintf(2, "can't pint, stack empty\n");
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%u: ", line_number);
+        fprintf(stderr, "can't pint, stack empty\n");
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	printf("%d\n", (*stack)->n);
+    fprintf(stdout, "%d\n", (*stack)->n);
 }
