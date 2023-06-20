@@ -40,26 +40,25 @@ void op_nop(stack_t **stack, unsigned int line_number)
  */
 void op_sub(stack_t **stack, unsigned int line_number)
 {
-	int i = 0;
-	stack_t *q = NULL;
+    int i = 0;
+    stack_t *q = NULL;
 
-	q = *stack;
+    q = *stack;
 
-	for (; q != NULL; q = q->next, i++)
-		;
+    for (; q != NULL; q = q->next, i++)
+        ;
 
-	if (i < 2)
-	{
-		dprintf(2, "L%u: can't sub, stack too short\n", line_number);
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if (i < 2)
+    {
+        fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	q = (*stack)->next;
-	q->n -= (*stack)->n;
-	op_pop(stack, line_number);
+    q = (*stack)->next;
+    q->n -= (*stack)->n;
+    op_pop(stack, line_number);
 }
-
 /**
  * op_add - adds two elements
  * @stack: double pointer
