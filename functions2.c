@@ -20,12 +20,12 @@ void op_pall(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * handle_push - pushes stack
+ * op_push - pushes stack
  * @stack: double pointer
  * @line_number: line number
  * Return: void
  */
-void handle_push(stack_t **stack, unsigned int line_number)
+void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *x;
   
