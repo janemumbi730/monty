@@ -7,19 +7,19 @@
  */
 void op_pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *x;
+    stack_t *x;
 
-	if (stack == NULL || *stack == NULL)
-	{
-		dprintf(2, "L%u: can't pop an empty stack\n", line_number);
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
-	x = *stack;
-	*stack = (*stack)->next;
-	free(x);
+    if (stack == NULL || *stack == NULL)
+    {
+        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
+
+    x = *stack;
+    *stack = (*stack)->next;
+    free(x);
 }
-
 /**
  * op_nop - empty
  * @stack: double pointer
