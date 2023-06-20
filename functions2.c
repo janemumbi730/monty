@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
 
 /**
  * op_pall - prints stack
@@ -32,8 +31,8 @@ void op_push(stack_t **stack, unsigned int line_number)
 
 	if (!vrall.args)
 	{
-		dprintf(2, "L%u: ", line_number);
-		dprintf(2, "usage: push integer\n");
+		vprintf(2, "L%u: ", line_number);
+		vprintf(2, "usage: push integer\n");
 		free_vrall();
 		exit(EXIT_FAILURE);
 	}
