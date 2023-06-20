@@ -66,12 +66,25 @@ void op_sub(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);
 
-/* functions2 */
+/* functions2.c */
 void op_push(stack_t **stack, unsigned int line_number);
 void op_swap(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
-void op_stack(stack_t **stack, unsigned int line_number)
-void op_queue(stack_t **stack, unsigned int line_number)
+void op_stack(stack_t **stack, unsigned int line_number);
+void op_queue(stack_t **stack, unsigned int line_number);
 
+/* function3.c */
+void op_rotate(stack_t **stack, unsigned int line_number);
+void op_mode(stack_t **stack, unsigned int line_number);
+void op_printchar(stack_t **stack, unsigned int line_number);
+void op_printstr(stack_t **stack, unsigned int line_number);
+void op_reverse(stack_t **stack, unsigned int line_number);
+
+/* function4.c */
+int my_compstr(char *str1, char *str2);
+void op_divide(stack_t **stack, unsigned int line_number);
+void op_multiply(stack_t **stack, unsigned int line_number);
+int my_search(char *str, char c);
+char *my_strtok(char *str, char *dell);
 
 #endif
