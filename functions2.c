@@ -27,33 +27,33 @@ void op_pall(stack_t **stack, unsigned int line_number)
  */
 void op_push(stack_t **stack, unsigned int line_number)
 {
-	int a, n;
+    int a, n;
 
-	if (!vrall.args)
-	{
-		dprintf(2, "L%u: ", line_number);
-		dprintf(2, "usage: push integer\n");
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if (!vrall.args)
+    {
+        fprintf(stderr, "L%u: ", line_number);
+        fprintf(stderr, "usage: push integer\n");
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	for (a = 0; vrall.args[a] != '\0'; a++)
-	{
-		if (!isdigit(vrall.args[a]) && vrall.args[a] != '-')
-		{
-			dprintf(2, "L%u: ", line_number);
-			dprintf(2, "usage: push integer\n");
-			free_vrall();
-			exit(EXIT_FAILURE);
-		}
-	}
+    for (a = 0; vrall.args[a] != '\0'; a++)
+    {
+        if (!isdigit(vrall.args[a]) && vrall.args[a] != '-')
+        {
+            fprintf(stderr, "L%u: ", line_number);
+            fprintf(stderr, "usage: push integer\n");
+            free_vrall();
+            exit(EXIT_FAILURE);
+        }
+    }
 
-	n = atoi(vrall.args);
+    n = atoi(vrall.args);
 
-	if (vrall.lifo == 1)
-		plus_nodeint(stack, n);
-	else
-		plus_nodeintend(stack, n);
+    if (vrall.lifo == 1)
+        plus_nodeint(stack, n);
+    else
+        plus_nodeintend(stack, n);
 }
 /**
  * op_swap - swaps two elements of stack
