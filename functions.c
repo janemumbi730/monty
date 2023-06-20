@@ -67,24 +67,24 @@ void op_sub(stack_t **stack, unsigned int line_number)
  */
 void op_add(stack_t **stack, unsigned int line_number)
 {
-	int u = 0;
-	stack_t *q = NULL;
+    int u = 0;
+    stack_t *q = NULL;
 
-	q = *stack;
+    q = *stack;
 
-	for (; q != NULL; q = q->next, u++)
-		;
+    for (; q != NULL; q = q->next, u++)
+        ;
 
-	if (u < 2)
-	{
-		dprintf(2, "L%u: can't add, stack too short\n", line_number);
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if (u < 2)
+    {
+        fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	q = (*stack)->next;
-	q->n += (*stack)->n;
-	op_pop(stack, line_number);
+    q = (*stack)->next;
+    q->n += (*stack)->n;
+    op_pop(stack, line_number);
 }
 
 /**
