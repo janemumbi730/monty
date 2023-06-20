@@ -26,31 +26,31 @@ int my_compstr(char *str1, char *str2)
  */
 void op_divide(stack_t **stack, unsigned int line_number)
 {
-	int w = 0;
-	stack_t *q = NULL;
+    int w = 0;
+    stack_t *q = NULL;
 
-	q = *stack;
+    q = *stack;
 
-	for (; q != NULL; q = q->next, w++)
-		;
+    for (; q != NULL; q = q->next, w++)
+        ;
 
-	if (w < 2)
-	{
-		dprintf(2, "L%u: can't div, stack too short\n", line_number);
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if (w < 2)
+    {
+        fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	if ((*stack)->n == 0)
-	{
-		dprintf(2, "L%u: division by zero\n", line_number);
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
+    if ((*stack)->n == 0)
+    {
+        fprintf(stderr, "L%u: division by zero\n", line_number);
+        free_vrall();
+        exit(EXIT_FAILURE);
+    }
 
-	q = (*stack)->next;
-	q->n /= (*stack)->n;
-	op_pop(stack, line_number);
+    q = (*stack)->next;
+    q->n /= (*stack)->n;
+    op_pop(stack, line_number);
 }
 
 /**
