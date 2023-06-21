@@ -124,28 +124,29 @@ stack_t *plus_nodeint(stack_t **h, const int n)
 	stack_t *t;
 
 	if (h == NULL)
-		return (NULL);
-	t = malloc(sizeof(stack_t));
-	if (!t)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
-	t->n = n;
+    return NULL;
 
-	if (*h == NULL)
-	{
-		t->next = *h;
-		t->prev = NULL;
-		*h = t;
-		return (*h);
-	}
-	(*h)->prev = t;
-	t->next = (*h);
-	t->prev = NULL;
-	*h = t;
-	return (*h);
+t = malloc(sizeof(stack_t));
+if (!t)
+{
+    fprintf(stderr, "Error: malloc failed\n");
+    free_vrall();
+    exit(EXIT_FAILURE);
+}
+t->n = n;
+
+if (*h == NULL)
+{
+    t->next = *h;
+    t->prev = NULL;
+    *h = t;
+    return *h;
+}
+(*h)->prev = t;
+t->next = (*h);
+t->prev = NULL;
+*h = t;
+return (*h);
 }
 
 /**
