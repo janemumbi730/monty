@@ -1,45 +1,46 @@
 #include "monty.h"
-overrall_t vrall;
+
 /**
  * start_vrall - starts the universal variables
- * @fd: file descrp
+ * @vrall: pointer to the overall structure
+ * @fd: file descriptor
  * Return: void
  */
-void start_vrall(FILE *fd)
+void start_vrall(overrall_t *vrall, FILE *fd)
 {
-	vrall.lifo = 1;
-	vrall.cline = 1;
-	vrall.args = NULL;
-	vrall.h = NULL;
-	vrall.fd = fd;
-	vrall.buf = NULL;
+    vrall->lifo = 1;
+    vrall->cline = 1;
+    vrall->args = NULL;
+    vrall->h = NULL;
+    vrall->fd = fd;
+    vrall->buf = NULL;
 }
 
 /**
  * input_scanner - scans if file exists
  * @ac: argument count
  * @av: argument vector
- * Return: structure
+ * Return: file descriptor
  */
 FILE *input_scanner(int ac, char *av[])
 {
-	FILE *fd;
+    FILE *fd;
 
-	if (ac == 1 || ac > 2)
-{
-    fprintf(stderr, "USAGE: monty file\n");
-    exit(EXIT_FAILURE);
-}
+    if (ac == 1 || ac > 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
+    }
 
-fd = fopen(av[1], "r");
+    fd = fopen(av[1], "r");
 
-if (fd == NULL)
-{
-    fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-    exit(EXIT_FAILURE);
-}
+    if (fd == NULL)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+        exit(EXIT_FAILURE);
+    }
 
-return (fd);
+    return fd;
 }
 
 /**
@@ -48,9 +49,9 @@ return (fd);
  */
 void free_vrall(void)
 {
-	op_freelist(vrall.h);
-	free(vrall.buf);
-	fclose(vrall.fd);
+    op_freelist(vrall.h);
+    free(vrall.buf);
+    fclose(vrall.fd);
 }
 
 /**
@@ -67,10 +68,11 @@ int main(int ac, char *av[])
     char *line = NULL;
     char *y = NULL;
     char *z[2] = {NULL, NULL};
+    static overrall_t vrall; // Static local variable
 
     fd = input_scanner(ac, av);
-    start_vrall(fd);
-    line = (char*)malloc(sizeof(char) * x);
+    start_vrall(&vrall, fd);
+    line = (char *)malloc(sizeof(char) * x);
     if (!line)
     {
         fprintf(stderr, "Error: malloc failed\n");
