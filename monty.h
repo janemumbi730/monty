@@ -98,6 +98,6 @@ stack_t *plus_nodeint(stack_t **h, const int n);
 void op_freelist(stack_t *h);
 
 /*main.c*/
-void free_vrall(struct vrall *vr);
+void free_vrall(void);
 
 #endif
