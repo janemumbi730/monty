@@ -27,33 +27,33 @@ void op_pall(stack_t **stack, unsigned int line_number)
  */
 void op_push(stack_t **stack, unsigned int line_number)
 {
-    int a, n;
+	int a, n;
 
-    if (!vrall.args)
-    {
-        fprintf(stderr, "L%u: ", line_number);
-        fprintf(stderr, "usage: push integer\n");
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (!vrall.args)
+	{
+		fprintf(stderr, "L%u: ", line_number);
+		fprintf(stderr, "usage: push integer\n");
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    for (a = 0; vrall.args[a] != '\0'; a++)
-    {
-        if (!isdigit(vrall.args[a]) && vrall.args[a] != '-')
-        {
-            fprintf(stderr, "L%u: ", line_number);
-            fprintf(stderr, "usage: push integer\n");
-            free_vrall();
-            exit(EXIT_FAILURE);
-        }
-    }
+	for (a = 0; vrall.args[a] != '\0'; a++)
+	{
+	if (!isdigit(vrall.args[a]) && vrall.args[a] != '-')
+	{
+		fprintf(stderr, "L%u: ", line_number);
+		fprintf(stderr, "usage: push integer\n");
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
+	}
 
-    n = atoi(vrall.args);
+		n = atoi(vrall.args);
 
-    if (vrall.lifo == 1)
-        plus_nodeint(stack, n);
-    else
-        plus_nodeintend(stack, n);
+	if (vrall.lifo == 1)
+		plus_nodeint(stack, n);
+	else
+		plus_nodeintend(stack, n);
 }
 /**
  * op_swap - swaps two elements of stack
@@ -63,27 +63,27 @@ void op_push(stack_t **stack, unsigned int line_number)
  */
 void op_swap(stack_t **stack, unsigned int line_number)
 {
-    int w = 0;
-    stack_t *q = NULL;
+	int w = 0;
+	stack_t *q = NULL;
 
-    q = *stack;
+	q = *stack;
 
-    for (; q != NULL; q = q->next, w++)
-        ;
+	for (; q != NULL; q = q->next, w++)
+	;
 
-    if (w < 2)
-    {
-        fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (w < 2)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    q = *stack;
-    *stack = (*stack)->next;
-    q->next = (*stack)->next;
-    q->prev = *stack;
-    (*stack)->next = q;
-    (*stack)->prev = NULL;
+	q = *stack;
+	*stack = (*stack)->next;
+	q->next = (*stack)->next;
+	q->prev = *stack;
+	(*stack)->next = q;
+	(*stack)->prev = NULL;
 }
 
 /**

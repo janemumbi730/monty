@@ -7,18 +7,18 @@
  */
 void op_pop(stack_t **stack, unsigned int line_number)
 {
-    stack_t *x;
+	stack_t *x;
 
-    if (stack == NULL || *stack == NULL)
-    {
-        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    x = *stack;
-    *stack = (*stack)->next;
-    free(x);
+	x = *stack;
+	*stack = (*stack)->next;
+	free(x);
 }
 /**
  * op_nop - empty
@@ -40,24 +40,24 @@ void op_nop(stack_t **stack, unsigned int line_number)
  */
 void op_sub(stack_t **stack, unsigned int line_number)
 {
-    int i = 0;
-    stack_t *q = NULL;
+	int i = 0;
+	stack_t *q = NULL;
 
-    q = *stack;
+	q = *stack;
 
-    for (; q != NULL; q = q->next, i++)
-        ;
+	for (; q != NULL; q = q->next, i++)
+		;
 
-    if (i < 2)
-    {
-        fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (i < 2)
+	{
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    q = (*stack)->next;
-    q->n -= (*stack)->n;
-    op_pop(stack, line_number);
+	q = (*stack)->next;
+	q->n -= (*stack)->n;
+	op_pop(stack, line_number);
 }
 /**
  * op_add - adds two elements
@@ -67,24 +67,24 @@ void op_sub(stack_t **stack, unsigned int line_number)
  */
 void op_add(stack_t **stack, unsigned int line_number)
 {
-    int u = 0;
-    stack_t *q = NULL;
+	int u = 0;
+	stack_t *q = NULL;
 
-    q = *stack;
+	q = *stack;
 
-    for (; q != NULL; q = q->next, u++)
-        ;
+	for (; q != NULL; q = q->next, u++)
+		;
 
-    if (u < 2)
-    {
-        fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (u < 2)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    q = (*stack)->next;
-    q->n += (*stack)->n;
-    op_pop(stack, line_number);
+	q = (*stack)->next;
+	q->n += (*stack)->n;
+	op_pop(stack, line_number);
 }
 
 /**
@@ -95,15 +95,15 @@ void op_add(stack_t **stack, unsigned int line_number)
  */
 void op_pint(stack_t **stack, unsigned int line_number)
 {
-    (void)line_number;
+	(void)line_number;
 
-    if (*stack == NULL)
-    {
-        fprintf(stderr, "L%u: ", line_number);
-        fprintf(stderr, "can't pint, stack empty\n");
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: ", line_number);
+		fprintf(stderr, "can't pint, stack empty\n");
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    fprintf(stdout, "%d\n", (*stack)->n);
+		fprintf(stdout, "%d\n", (*stack)->n);
 }

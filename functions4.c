@@ -3,14 +3,14 @@
  * my_compstr - compares two strings
  * @str1: string 1 to be compared
  * @str2: string 2 to be compared with
- * Return: 0 
- */
+ * Return: 0
+ **/
 int my_compstr(char *str1, char *str2)
 {
 	int a;
 
 	for (a = 0; str1[a] == str2[a] && str1[a]; a++)
-		;
+	;
 	if (str1[a] > str2[a])
 		return (1);
 	if (str1[a] < str2[a])
@@ -26,31 +26,31 @@ int my_compstr(char *str1, char *str2)
  */
 void op_divide(stack_t **stack, unsigned int line_number)
 {
-    int w = 0;
-    stack_t *q = NULL;
+	int w = 0;
+	stack_t *q = NULL;
 
-    q = *stack;
+	q = *stack;
 
-    for (; q != NULL; q = q->next, w++)
-        ;
+	for (; q != NULL; q = q->next, w++)
+		;
 
-    if (w < 2)
-    {
-        fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if (w < 2)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    if ((*stack)->n == 0)
-    {
-        fprintf(stderr, "L%u: division by zero\n", line_number);
-        free_vrall();
-        exit(EXIT_FAILURE);
-    }
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-    q = (*stack)->next;
-    q->n /= (*stack)->n;
-    op_pop(stack, line_number);
+	q = (*stack)->next;
+	q->n /= (*stack)->n;
+	op_pop(stack, line_number);
 }
 
 /**
@@ -64,21 +64,21 @@ void op_multiply(stack_t **stack, unsigned int line_number)
 	int w = 0;
 	stack_t *q = NULL;
 
-q = *stack;
+	q = *stack;
 
-for (; q != NULL; q = q->next, w++)
-    ;
+	for (; q != NULL; q = q->next, w++)
+		;
 
-if (w < 2)
-{
-    fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
-    free_vrall();
-    exit(EXIT_FAILURE);
-}
+	if (w < 2)
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		free_vrall();
+		exit(EXIT_FAILURE);
+	}
 
-q = (*stack)->next;
-q->n *= (*stack)->n;
-op_pop(stack, line_number);
+	q = (*stack)->next;
+	q->n *= (*stack)->n;
+	op_pop(stack, line_number);
 
 }
 /**
