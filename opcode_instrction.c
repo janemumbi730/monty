@@ -9,31 +9,34 @@ stack_t *plus_nodeintend(stack_t **h, const int n)
 {
 	stack_t *t, *q;
 
-	if (h == NULL)
-		return (NULL);
-	t = malloc(sizeof(stack_t));
-	if (!t)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		free_vrall();
-		exit(EXIT_FAILURE);
-	}
-	t->n = n;
-  
-	if (*h == NULL)
-	{
-		t->next = *h;
-		t->prev = NULL;
-		*h = t;
-		return (*h);
-	}
-	q = *h;
-	while (q->next)
-		q = q->next;
-	t->next = q->next;
-	t->prev = q;
-	q->next = t;
-	return (q->next);
+if (h == NULL)
+    return NULL;
+
+t = malloc(sizeof(stack_t));
+if (!t)
+{
+    fprintf(stderr, "Error: malloc failed\n");
+    free_vrall();
+    exit(EXIT_FAILURE);
+}
+t->n = n;
+
+if (*h == NULL)
+{
+    t->next = *h;
+    t->prev = NULL;
+    *h = t;
+    return *h;
+}
+
+q = *h;
+while (q->next)
+    q = q->next;
+
+t->next = q->next;
+t->prev = q;
+q->next = t;
+return q->next;
 }
 
 /**
