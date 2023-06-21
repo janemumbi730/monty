@@ -28,20 +28,20 @@ FILE *input_scanner(int ac, char *av[])
 	FILE *fd;
 
 	if (ac == 1 || ac > 2)
-	{
-		dprintf(2, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+{
+    fprintf(stderr, "USAGE: monty file\n");
+    exit(EXIT_FAILURE);
+}
 
-	fd = fopen(av[1], "r");
+fd = fopen(av[1], "r");
 
-	if (fd == NULL)
-	{
-		dprintf(2, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
-	}
+if (fd == NULL)
+{
+    fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+    exit(EXIT_FAILURE);
+}
 
-	return (fd);
+return (fd);
 }
 
 /**
