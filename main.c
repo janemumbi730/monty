@@ -1,27 +1,18 @@
 #include "monty.h"
 
-	struct vrall{
-    stack_t *h;
-    int lifo;
-    unsigned int cline;
-    char *args;
-    FILE *fd;
-    char *buf;
-};
-
 /**
  * start_vrall - starts the universal variables
  * @fd: file descrp
  * Return: void
  */
-void start_vrall(struct vrall *vr, FILE *fd)
+void start_vrall(FILE *fd)
 {
-	vr->lifo = 1;
-    vr->cline = 1;
-    vr->args = NULL;
-    vr->h = NULL;
-    vr->fd = fd;
-    vr->buf = NULL;
+	vrall.lifo = 1;
+	vrall.cline = 1;
+	vrall.args = NULL;
+	vrall.h = NULL;
+	vrall.fd = fd;
+	vrall.buf = NULL;
 }
 
 /**
@@ -55,11 +46,11 @@ return (fd);
  * free_vrall - frees the universal variables
  * Return: void
  */
-void free_vrall(struct vrall *vr)
+void free_vrall(void)
 {
-    op_freelist(vr->h);
-    free(vr->buf);
-    fclose(vr->fd);
+	op_freelist(vrall.h);
+	free(vrall.buf);
+	fclose(vrall.fd);
 }
 
 /**
@@ -77,10 +68,8 @@ int main(int ac, char *av[])
     char *y = NULL;
     char *z[2] = {NULL, NULL};
 
-	struct vrall vrall;
-
     fd = input_scanner(ac, av);
-    start_vrall(&vrall, fd);
+    start_vrall(fd);
     line = (char*)malloc(sizeof(char) * x);
     if (!line)
     {
@@ -108,7 +97,7 @@ int main(int ac, char *av[])
     }
 
     free(line);
-    free_vrall(&vrall);
+    free_vrall();
 
     return 0;
 }
