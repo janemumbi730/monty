@@ -1,5 +1,5 @@
 #include "monty.h"
-
+overrall_t vrall;
 /**
  * start_vrall - starts the universal variables
  * @fd: file descrp
