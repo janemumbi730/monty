@@ -67,12 +67,12 @@ int main(int ac, char *av[])
     FILE *fd;
     size_t x = 256;
     char *line = NULL;
-    ssize_t y = 0;
+    char *y = NULL;
     char *z[2] = {NULL, NULL};
 
     fd = input_scanner(ac, av);
     start_vrall(fd);
-    line = (char*)malloc(sizeof(char) * x); // Allocate memory for line
+    line = (char*)malloc(sizeof(char) * x);
     if (!line)
     {
         fprintf(stderr, "Error: malloc failed\n");
