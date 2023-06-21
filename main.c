@@ -1,6 +1,13 @@
 #include "monty.h"
 
-overrall_t vrall;
+typedef struct {
+    stack_t *h;
+    int lifo;
+    unsigned int cline;
+    char *args;
+    FILE *fd;
+    char *buf;
+} vrall_t;
 
 /**
  * start_vrall - starts the universal variables
